@@ -6,6 +6,7 @@
 [![Codecov branch](https://img.shields.io/codecov/c/github/iris-contrib/swagger/master.svg)](https://codecov.io/gh/iris-contrib/swagger)
 [![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
 [![GoDoc](https://godoc.org/github.com/iris-contrib/swagger?status.svg)](https://godoc.org/github.com/iris-contrib/swagger)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger?ref=badge_shield)
 
 ## Usage
 
@@ -124,3 +125,7 @@ func main() {
 
 Then, if you set envioment variable `NAME_OF_ENV_VARIABLE` to anything, `/swagger/*any`
 will respond 404, just like when route unspecified.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger?ref=badge_large)
