@@ -3,7 +3,7 @@ package api
 import (
 	"fmt"
 
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"github.com/swaggo/swag/example/basic/web"
 )
 

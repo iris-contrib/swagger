@@ -8,7 +8,7 @@ import (
 
 	"golang.org/x/net/webdav"
 
-	"github.com/kataras/iris"
+	"github.com/kataras/iris/v12"
 	"github.com/swaggo/swag"
 )
 

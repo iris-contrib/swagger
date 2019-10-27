@@ -5,11 +5,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/iris-contrib/swagger/swaggerFiles"
-	"github.com/kataras/iris"
+	"github.com/iris-contrib/swagger/v12/swaggerFiles"
+	"github.com/kataras/iris/v12"
 	"github.com/stretchr/testify/assert"
 
-	_ "github.com/iris-contrib/swagger/example/basic/docs"
+	_ "github.com/iris-contrib/swagger/v12/example/basic/docs"
 )
 
 func TestWrapHandler(t *testing.T) {
