@@ -16,7 +16,6 @@
 
 ```sh
 $ go get -u github.com/swaggo/swag/cmd/swag
-$ go get github.com/iris-contrib/swagger/v12@latest
 ```
 
 3. Run the [Swag](https://github.com/swaggo/swag) in your Go project root folder which contains `main.go` file, [Swag](https://github.com/swaggo/swag) will parse comments and generate required files(`docs` folder and `docs/doc.go`).
@@ -28,9 +27,9 @@ $ swag init
 4. Download [swagger for Iris](https://github.com/iris-contrib/swagger) by using:
 
 ```sh
-$ go get -u github.com/iris-contrib/swagger
-$ go get -u github.com/iris-contrib/swagger/swaggerFiles
+$ go get github.com/iris-contrib/swagger/v12@latest
 ```
+
 And import following in your code:
 
 ```go
