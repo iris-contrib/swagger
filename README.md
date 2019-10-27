@@ -2,8 +2,8 @@
 
 [Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0. Based on the [gin-swagger](https://github.com/swaggo/gin-swagger) as requested at [#1231](https://github.com/kataras/iris/issues/1231).
 
-[![Travis branch](https://img.shields.io/travis/iris-contrib/swagger/master.svg)](https://travis-ci.org/iris-contrib/swagger)
-[![Codecov branch](https://img.shields.io/codecov/c/github/iris-contrib/swagger/master.svg)](https://codecov.io/gh/iris-contrib/swagger)
+[![Travis branch](https://img.shields.io/travis/iris-contrib/swagger/v11.svg)](https://travis-ci.org/iris-contrib/swagger)
+[![Codecov branch](https://img.shields.io/codecov/c/github/iris-contrib/swagger/v11.svg)](https://codecov.io/gh/iris-contrib/swagger)
 [![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
 [![GoDoc](https://godoc.org/github.com/iris-contrib/swagger?status.svg)](https://godoc.org/github.com/iris-contrib/swagger)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Firis-contrib%2Fswagger?ref=badge_shield)
