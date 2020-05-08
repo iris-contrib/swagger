@@ -15,7 +15,8 @@ import (
 // Config stores swagger configuration variables.
 type Config struct {
 	//The url pointing to API definition (normally swagger.json or swagger.yaml). Default is `doc.json`.
-	URL string
+	URL         string
+	DeepLinking bool
 }
 
 // URL presents the url pointing to API definition (normally swagger.json or swagger.yaml).
@@ -25,10 +26,18 @@ func URL(url string) func(c *Config) {
 	}
 }
 
+// DeepLinking set the swagger deeplinking configuration
+func DeepLinking(deepLinking bool) func(c *Config) {
+	return func(c *Config) {
+		c.DeepLinking = deepLinking
+	}
+}
+
 // WrapHandler wraps `http.Handler` into `iris.Handler`.
 func WrapHandler(h *webdav.Handler, confs ...func(c *Config)) iris.Handler {
 	defaultConfig := &Config{
-		URL: "doc.json",
+		URL:         "doc.json",
+		DeepLinking: true,
 	}
 
 	for _, c := range confs {
@@ -42,14 +51,15 @@ func WrapHandler(h *webdav.Handler, confs ...func(c *Config)) iris.Handler {
 func CustomWrapHandler(config *Config, h *webdav.Handler) iris.Handler {
 	//create a template with name
 	t := template.New("swagger_index.html")
-	index, _ := t.Parse(swagger_index_templ)
+	index, _ := t.Parse(indexTmpl)
 
 	var rexp = regexp.MustCompile(`(.*)(index\.html|doc\.json|favicon-16x16\.png|favicon-32x32\.png|/oauth2-redirect\.html|swagger-ui\.css|swagger-ui\.css\.map|swagger-ui\.js|swagger-ui\.js\.map|swagger-ui-bundle\.js|swagger-ui-bundle\.js\.map|swagger-ui-standalone-preset\.js|swagger-ui-standalone-preset\.js\.map)[\?|.]*`)
 
 	return func(ctx iris.Context) {
 
 		type swaggerUIBundle struct {
-			URL string
+			URL         string
+			DeepLinking bool
 		}
 
 		var matches []string
@@ -74,7 +84,8 @@ func CustomWrapHandler(config *Config, h *webdav.Handler) iris.Handler {
 		switch path {
 		case "index.html":
 			index.Execute(ctx.ResponseWriter(), &swaggerUIBundle{
-				URL: config.URL,
+				URL:         config.URL,
+				DeepLinking: config.DeepLinking,
 			})
 		case "doc.json":
 			doc, err := swag.ReadDoc()
@@ -120,7 +131,7 @@ func DisablingCustomWrapHandler(config *Config, h *webdav.Handler, envName strin
 	return CustomWrapHandler(config, h)
 }
 
-const swagger_index_templ = `<!-- HTML for static distribution bundle build -->
+const indexTmpl = `<!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,7 +216,8 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+	deepLinking: {{.DeepLinking}}
   })
 
   window.ui = ui
