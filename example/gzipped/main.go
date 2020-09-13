@@ -1,9 +1,10 @@
 package main
 
 import (
+	"github.com/kataras/iris/v12"
+
 	"github.com/iris-contrib/swagger/v12"
 	"github.com/iris-contrib/swagger/v12/swaggerFiles"
-	"github.com/kataras/iris/v12"
 
 	_ "github.com/iris-contrib/swagger/v12/example/basic/docs"
 )
@@ -24,10 +25,10 @@ import (
 // @BasePath /v2
 func main() {
 	app := iris.New()
-	app.Use(iris.Gzip)
+	app.Use(iris.Compression)
 
 	url := swagger.URL("http://localhost:8080/swagger/doc.json") //The url pointing to API definition
 	app.Get("/swagger/{any:path}", swagger.WrapHandler(swaggerFiles.Handler, url))
 
-	app.Run(iris.Addr(":8080"))
+	app.Listen(":8080")
 }

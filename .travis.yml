@@ -1,12 +1,12 @@
 language: go
 
 go:
-  - 1.14.x
+  - 1.15.x
 
 matrix:
   fast_finish: true
   include:
-  - go: 1.14.x
+  - go: 1.15.x
     env: GO111MODULE=on
 
 script:

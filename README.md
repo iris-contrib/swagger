@@ -1,6 +1,6 @@
 # Swagger for the Iris web framework
 
-[Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0. Based on the [gin-swagger](https://github.com/swaggo/gin-swagger) as requested at [#1231](https://github.com/kataras/iris/issues/1231).
+[Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0 as requested at [#1231](https://github.com/kataras/iris/issues/1231).
 
 [![Travis branch](https://img.shields.io/travis/iris-contrib/swagger/v12.svg)](https://travis-ci.org/iris-contrib/swagger)
 [![Codecov branch](https://img.shields.io/codecov/c/github/iris-contrib/swagger/master.svg)](https://codecov.io/gh/iris-contrib/swagger)
@@ -27,7 +27,7 @@ $ swag init
 4. Download [swagger for Iris](https://github.com/iris-contrib/swagger) by using:
 
 ```sh
-$ go get github.com/iris-contrib/swagger/v12@latest
+$ go get github.com/iris-contrib/swagger/v12@v12.2.0-alpha
 ```
 
 And import following in your code:
