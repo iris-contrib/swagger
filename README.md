@@ -95,5 +95,5 @@ func main() {
 6. If you want to disable swagger when some environment variable is set, use `DisablingHandler` instead of `Handler`.
 
 ```go
-swagger.DisablingHandler(swaggerFiles.Handler, "THE_OS_VARIABLE_NAME_HERE" config)
+swagger.DisablingHandler(swaggerFiles.Handler, "THE_OS_VARIABLE_NAME_HERE", config)
 ```
