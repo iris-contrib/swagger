@@ -90,9 +90,7 @@ func main() {
 }
 ```
 
-5. Run it, and browse to http://localhost:8080/swagger/index.html, you can see Swagger 2.0 API documentation.
-
-![swagger_index.html](example.png)
+5. Run it, and navigate through <http://localhost:8080/swagger/index.html>, you should see the Swagger 2.0 API documentation page.
 
 6. If you want to disable swagger when some environment variable is set, use `DisablingHandler` instead of `Handler`.
 
