@@ -173,7 +173,7 @@ func DisablingHandler(h *webdav.Handler, envName string, configurators ...Config
 			ctx.NotFound()
 		}
 	}
- 
+
 	return Handler(h, configurators...)
 }
 

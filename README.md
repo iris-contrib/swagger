@@ -2,9 +2,8 @@
 
 [Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0 as requested at [#1231](https://github.com/kataras/iris/issues/1231).
 
-[![Travis branch](https://img.shields.io/travis/iris-contrib/swagger/v12.svg)](https://travis-ci.org/iris-contrib/swagger)
-[![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
-[![GoDoc](https://godoc.org/github.com/iris-contrib/swagger?status.svg)](https://pkg.go.dev/github.com/iris-contrib/swagger)
+[![build status](https://img.shields.io/github/workflow/status/iris-contrib/swagger/CI/master?style=for-the-badge)](https://github.com/iris-contrib/swagger/actions) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger?style=for-the-badge)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
 
 ## Usage
 
@@ -14,7 +13,7 @@
 2. Download [Swag](https://github.com/swaggo/swag) for Go by using:
 
 ```sh
-$ go get -u github.com/swaggo/swag/cmd/swag
+$ go install github.com/swaggo/swag/cmd/swag@latest
 ```
 
 3. Run the [Swag](https://github.com/swaggo/swag) in your Go project root folder which contains `main.go` file, [Swag](https://github.com/swaggo/swag) will parse comments and generate required files(`docs` folder and `docs/doc.go`).
