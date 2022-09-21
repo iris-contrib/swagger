@@ -4,7 +4,6 @@ import (
 	"github.com/kataras/iris/v12"
 )
 
-//
 // @Summary Add a new pet to the store
 // @Description get string by ID
 // @Accept  json

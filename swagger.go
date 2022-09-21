@@ -85,23 +85,24 @@ func DeepLinking(deepLinking bool) ConfiguratorFunc {
 // Handler wraps the webdav http handler into an Iris Handler one.
 //
 // Usage:
-//  swaggerUI := swagger.Handler(swaggerFiles.Handler,
-//   swagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition))
-//   swagger.DeepLinking(true),
-//   swagger.Prefix("/swagger"),
-//  )
-//  app.Get("/swagger", swaggerUI)
-//  app.Get("/swagger/{any:path}", swaggerUI)
+//
+//	swaggerUI := swagger.Handler(swaggerFiles.Handler,
+//	 swagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition))
+//	 swagger.DeepLinking(true),
+//	 swagger.Prefix("/swagger"),
+//	)
+//	app.Get("/swagger", swaggerUI)
+//	app.Get("/swagger/{any:path}", swaggerUI)
 //
 // OR
 //
-//  swaggerUI := swagger.Handler(swaggerFiles.Handler, swagger.Config{
-//   URL: ...,
-//   Prefix: ...,
-//   DeepLinking: ...,
-//   DocExpansion: ...,
-//   DomID: ...,
-//  }
+//	swaggerUI := swagger.Handler(swaggerFiles.Handler, swagger.Config{
+//	 URL: ...,
+//	 Prefix: ...,
+//	 DeepLinking: ...,
+//	 DocExpansion: ...,
+//	 DomID: ...,
+//	}
 func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 	config := &Config{
 		URL:          "doc.json",
