@@ -256,7 +256,8 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+    filter: {{.Filter}}
   })
   window.ui = ui
 }
