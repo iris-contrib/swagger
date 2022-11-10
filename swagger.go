@@ -35,6 +35,8 @@ type Config struct {
 	DeepLinking  bool
 	DocExpansion string
 	DomID        string
+	// Enabling tag Filtering
+	Filter       bool
 }
 
 // Configure completes the Configurator interface.
@@ -45,6 +47,7 @@ func (c Config) Configure(config *Config) {
 	config.DeepLinking = c.DeepLinking
 	config.DocExpansion = c.DocExpansion
 	config.DomID = c.DomID
+	config.Filter = c.Filter
 }
 
 // URL presents the URL pointing to API definition (normally swagger.json or swagger.yaml).
@@ -110,6 +113,7 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 		DocExpansion: "list",
 		DomID:        "#swagger-ui",
 		Prefix:       "/swagger",
+		Filter:       true,
 	}
 
 	for _, c := range configurators {
@@ -252,7 +256,8 @@ window.onload = function() {
     plugins: [
       SwaggerUIBundle.plugins.DownloadUrl
     ],
-    layout: "StandaloneLayout"
+    layout: "StandaloneLayout",
+    filter: {{.Filter}}
   })
   window.ui = ui
 }
