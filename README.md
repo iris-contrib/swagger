@@ -2,7 +2,7 @@
 
 [Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0 as requested at [#1231](https://github.com/kataras/iris/issues/1231).
 
-[![build status](https://img.shields.io/github/workflow/status/iris-contrib/swagger/CI/master?style=for-the-badge)](https://github.com/iris-contrib/swagger/actions) 
+[![build status](https://img.shields.io/github/actions/workflow/status/iris-contrib/swagger/ci.yml?branch=master&style=for-the-badge)](https://github.com/iris-contrib/swagger/actions) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger?style=for-the-badge)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
 
 ## Usage
