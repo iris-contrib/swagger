@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/kataras/iris/v12 v12.2.0-beta7
 	github.com/swaggo/swag v1.8.9
-	golang.org/x/net v0.4.0
+	golang.org/x/net v0.7.0
 )
 
 require (
@@ -53,8 +53,8 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/yosssi/ace v0.0.5 // indirect
 	golang.org/x/crypto v0.4.0 // indirect
-	golang.org/x/sys v0.3.0 // indirect
-	golang.org/x/text v0.5.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
