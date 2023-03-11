@@ -36,7 +36,7 @@ type Config struct {
 	DocExpansion string
 	DomID        string
 	// Enabling tag Filtering
-	Filter       bool
+	Filter bool
 }
 
 // Configure completes the Configurator interface.
