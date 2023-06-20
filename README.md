@@ -14,6 +14,14 @@
 
 ```sh
 $ go install github.com/swaggo/swag/cmd/swag@latest
+
+# if you find swag cli not work, you can try to install swag cli from source
+git clone git@github.com:swaggo/swag.git
+cd swag
+# tag variable should match with github.com/swaggo/swag in go.mod
+# here we use v1.8.10
+git checkout -b ${tag} tags/${tag}
+go install ./cmd/swag
 ```
 
 3. Run the [Swag](https://github.com/swaggo/swag) in your Go project root folder which contains `main.go` file, [Swag](https://github.com/swaggo/swag) will parse comments and generate required files(`docs` folder and `docs/doc.go`).
@@ -31,7 +39,7 @@ $ go get github.com/iris-contrib/swagger/v12@master
 And import following in your code:
 
 ```go
-import "github.com/iris-contrib/swagger/v12" // swagger middleware for Iris 
+import "github.com/iris-contrib/swagger" // swagger middleware for Iris 
 import "github.com/iris-contrib/swagger/v12/swaggerFiles" // swagger embed files
 
 ```
@@ -44,7 +52,7 @@ package main
 import (
     "github.com/kataras/iris/v12"
 
-    "github.com/iris-contrib/swagger/v12"
+    "github.com/iris-contrib/swagger"
     "github.com/iris-contrib/swagger/v12/swaggerFiles"
 
     _ "github.com/your_username/your_project/docs"
@@ -69,16 +77,11 @@ import (
 func main() {
     app := iris.New()
 
-    config := swagger.Config{
-        // The url pointing to API definition.
-        URL:          "http://localhost:8080/swagger/doc.json",
-        DeepLinking:  true,
-        DocExpansion: "list",
-        DomID:        "#swagger-ui",
-        // The UI prefix URL (see route).
-        Prefix:       "/swagger",
-    }
-    swaggerUI := swagger.Handler(swaggerFiles.Handler, config)
+    swaggerUI := swagger.Handler(swaggerFiles.Handler,
+		swagger.URL("/swagger/doc.json"),
+		swagger.DeepLinking(true),
+		swagger.Prefix("/swagger"),
+	)
 
     // Register on http://localhost:8080/swagger
     app.Get("/swagger", swaggerUI)
