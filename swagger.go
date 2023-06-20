@@ -32,6 +32,7 @@ type Config struct {
 	// The prefix url which this swagger ui is registered on.
 	// Defaults to "/swagger". It can be a "." too.
 	Prefix       string
+	FontCDN      string
 	DeepLinking  bool
 	DocExpansion string
 	DomID        string
@@ -61,6 +62,14 @@ func URL(url string) ConfiguratorFunc {
 func Prefix(prefix string) ConfiguratorFunc {
 	return func(c *Config) {
 		c.Prefix = prefix
+	}
+}
+
+// Change google font cdn to any you like.
+func FontCDN(cdn string) ConfiguratorFunc {
+	cdn = strings.TrimSuffix(cdn, "/")
+	return func(c *Config) {
+		c.FontCDN = cdn
 	}
 }
 
@@ -113,6 +122,7 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 		DocExpansion: "list",
 		DomID:        "#swagger-ui",
 		Prefix:       "/swagger",
+		FontCDN:      "https://fonts.googleapis.com",
 		Filter:       true,
 	}
 
@@ -188,7 +198,7 @@ var indexTmpl = template.Must(template.New("swagger_index.html").Parse(`<!-- HTM
 <head>
   <meta charset="UTF-8">
   <title>Swagger UI</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link href="{{.FontCDN}}/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{.Prefix}}/swagger-ui.css" >
   <link rel="icon" type="image/png" href="{{.Prefix}}/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="{{.Prefix}}/favicon-16x16.png" sizes="16x16" />
