@@ -40,7 +40,7 @@ And import following in your code:
 
 ```go
 import "github.com/iris-contrib/swagger" // swagger middleware for Iris 
-import "github.com/iris-contrib/swagger/v12/swaggerFiles" // swagger embed files
+import "github.com/iris-contrib/swagger/swaggerFiles" // swagger embed files
 
 ```
 
