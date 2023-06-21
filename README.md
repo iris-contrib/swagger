@@ -97,5 +97,18 @@ func main() {
 6. If you want to disable swagger when some environment variable is set, use `DisablingHandler` instead of `Handler`.
 
 ```go
-swagger.DisablingHandler(swaggerFiles.Handler, "THE_OS_VARIABLE_NAME_HERE", config)
+swagger.DisablingHandler(swaggerFiles.Handler, "THE_OS_VARIABLE_NAME_HERE", configurators ...Configurator)
+```
+
+7. If you want to change swagger-ui theme, you can add `swagger.SetTheme(swagger.Monokai)` when init `swaggerUI`
+```go
+swaggerUI := swagger.Handler(swaggerFiles.Handler,
+    swagger.URL("/swagger/doc.json"),
+    swagger.DeepLinking(true),
+    swagger.Prefix("/swagger"),
+    // ref: https://github.com/ostranme/swagger-ui-themes
+    // current we support 7 themes
+    // theme is a optional config, if you not set, it will use default theme
+    swagger.SetTheme(swagger.Monokai),
+)
 ```
