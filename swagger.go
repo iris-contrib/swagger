@@ -3,6 +3,7 @@ package swagger
 import (
 	"html/template"
 	"os"
+	"regexp"
 	"strings"
 
 	"golang.org/x/net/webdav"
@@ -27,7 +28,7 @@ func (fn ConfiguratorFunc) Configure(config *Config) {
 // Config stores swagger configuration variables.
 type Config struct {
 	// The URL pointing to API definition (normally swagger.json or swagger.yaml).
-	// Default is `doc.json`.
+	// Default is `swagger.json`.
 	URL string
 	// The prefix url which this swagger ui is registered on.
 	// Defaults to "/swagger". It can be a "." too.
@@ -85,12 +86,14 @@ func DeepLinking(deepLinking bool) ConfiguratorFunc {
 	}
 }
 
+var instanceNameRegex = regexp.MustCompile(`^/(\w+)\.json$`)
+
 // Handler wraps the webdav http handler into an Iris Handler one.
 //
 // Usage:
 //
 //	swaggerUI := swagger.Handler(swaggerFiles.Handler,
-//	 swagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition))
+//	 swagger.URL("http://localhost:8080/swagger/swagger.json"), // The url pointing to API definition))
 //	 swagger.DeepLinking(true),
 //	 swagger.Prefix("/swagger"),
 //	)
@@ -108,7 +111,7 @@ func DeepLinking(deepLinking bool) ConfiguratorFunc {
 //	}
 func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 	config := &Config{
-		URL:          "doc.json",
+		URL:          "swagger/swagger.json",
 		DeepLinking:  true,
 		DocExpansion: "list",
 		DomID:        "#swagger-ui",
@@ -141,7 +144,16 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 				ctx.ContentType("application/json")
 			}
 		}
-
+		if match := instanceNameRegex.FindStringSubmatch(path); match != nil {
+			doc, err := swag.ReadDoc(match[1]) // default instance name is swagger
+			if err != nil {
+				ctx.Application().Logger().Errorf("swagger: %v", err)
+				ctx.StopWithStatus(iris.StatusInternalServerError)
+				return
+			}
+			ctx.WriteString(doc)
+			return
+		}
 		switch path {
 		case "", "/", "/index.html":
 			ctx.ContentType("text/html; charset=utf-8")
@@ -151,14 +163,6 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 				ctx.StopWithStatus(iris.StatusInternalServerError)
 				return
 			}
-		case "/doc.json":
-			doc, err := swag.ReadDoc()
-			if err != nil {
-				ctx.Application().Logger().Errorf("swagger: %v", err)
-				ctx.StopWithStatus(iris.StatusInternalServerError)
-				return
-			}
-			ctx.WriteString(doc)
 		default:
 			h.ServeHTTP(ctx.ResponseWriter(), ctx.Request())
 		}
