@@ -1,6 +1,7 @@
 package swagger
 
 import (
+	"fmt"
 	"html/template"
 	"os"
 	"regexp"
@@ -33,6 +34,8 @@ type Config struct {
 	// The prefix url which this swagger ui is registered on.
 	// Defaults to "/swagger". It can be a "." too.
 	Prefix       string
+	FontCDN      string
+	Theme        Theme
 	DeepLinking  bool
 	DocExpansion string
 	DomID        string
@@ -62,6 +65,59 @@ func URL(url string) ConfiguratorFunc {
 func Prefix(prefix string) ConfiguratorFunc {
 	return func(c *Config) {
 		c.Prefix = prefix
+	}
+}
+
+// Change google font cdn to any you like.
+func FontCDN(cdn string) ConfiguratorFunc {
+	cdn = strings.TrimSuffix(cdn, "/")
+	return func(c *Config) {
+		c.FontCDN = cdn
+	}
+}
+
+type Theme string
+
+const (
+	FeelingBlue Theme = "feeling-blue"
+	Material    Theme = "material"
+	Muted       Theme = "muted"
+	Outline     Theme = "outline"
+	Flattop     Theme = "flattop"
+	Monokai     Theme = "monokai"
+	Newspaper   Theme = "newspaper"
+	Unknow      Theme = "unknow"
+)
+
+func (t Theme) String() string {
+	switch t {
+	case FeelingBlue:
+		fallthrough
+	case Material:
+		fallthrough
+	case Muted:
+		fallthrough
+	case Outline:
+		fallthrough
+	case Flattop:
+		fallthrough
+	case Monokai:
+		fallthrough
+	case Newspaper:
+		themeName := string(t)
+		return fmt.Sprintf("theme-%s", themeName)
+	default:
+		return "unknow"
+	}
+}
+
+func (t Theme) IsValid() bool {
+	return t != Unknow
+}
+
+func SetTheme(theme Theme) ConfiguratorFunc {
+	return func(c *Config) {
+		c.Theme = theme
 	}
 }
 
@@ -116,6 +172,8 @@ func Handler(h *webdav.Handler, configurators ...Configurator) iris.Handler {
 		DocExpansion: "list",
 		DomID:        "#swagger-ui",
 		Prefix:       "/swagger",
+		FontCDN:      "https://fonts.googleapis.com",
+		Theme:        Unknow,
 		Filter:       true,
 	}
 
@@ -192,8 +250,11 @@ var indexTmpl = template.Must(template.New("swagger_index.html").Parse(`<!-- HTM
 <head>
   <meta charset="UTF-8">
   <title>Swagger UI</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link href="{{.FontCDN}}/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{.Prefix}}/swagger-ui.css" >
+  {{if .Theme.IsValid }}
+  <link rel="stylesheet" type="text/css" href="{{.Prefix}}/{{.Theme}}.css">
+  {{end}}
   <link rel="icon" type="image/png" href="{{.Prefix}}/favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="{{.Prefix}}/favicon-16x16.png" sizes="16x16" />
   <style>
