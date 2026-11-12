@@ -31,7 +31,7 @@ Please make sure the bug is reproducible over the `master` branch:
 ```sh
 $ cd PROJECT
 $ go get github.com/kataras/iris/v12@master
-$ go get github.com/iris-contrib/swagger@master
+$ go get github.com/iris-contrib/swagger/v12@latest
 $ go run .
 ```
 
