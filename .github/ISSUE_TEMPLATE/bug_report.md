@@ -24,14 +24,14 @@ If applicable, add screenshots to help explain your problem.
  - OS: [e.g. ubuntu, windows]
 
 **iris.Version**
-- e.g. v12.2.0-alpha8 or master
+- e.g. v14.0.0 or main
 
 Please make sure the bug is reproducible over the `master` branch:
 
 ```sh
 $ cd PROJECT
-$ go get github.com/kataras/iris/v12@master
-$ go get github.com/iris-contrib/swagger/v12@latest
+$ go get github.com/kataras/iris/v14@latest
+$ go get github.com/iris-contrib/swagger/v14@master
 $ go run .
 ```
 

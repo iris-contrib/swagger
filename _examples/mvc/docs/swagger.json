@@ -1,0 +1,282 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A controller of the Iris controller/mvc package, documented with swag comments.",
+        "title": "Stores API",
+        "contact": {},
+        "license": {
+            "name": "MIT",
+            "url": "https://github.com/iris-contrib/swagger/blob/master/LICENSE"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/stores": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Create a store",
+                "parameters": [
+                    {
+                        "description": "The new store. The server sets its id.",
+                        "name": "store",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Store"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/main.Store"
+                        }
+                    },
+                    "400": {
+                        "description": "The body is not a JSON object"
+                    }
+                }
+            }
+        },
+        "/stores/count": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Count the stores",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.StoreCount"
+                        }
+                    }
+                }
+            }
+        },
+        "/stores/list": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "List the stores",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "description": "The number of the page, the first one is 1",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "The number of stores in a page",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Which stores to list",
+                        "name": "filter",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/main.StoreFilter"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.StorePage"
+                        }
+                    }
+                }
+            }
+        },
+        "/stores/{store_id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Get a store",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The id of the store",
+                        "name": "store_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Store"
+                        }
+                    },
+                    "404": {
+                        "description": "There is no store with this id"
+                    }
+                }
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Update a store",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The id of the store",
+                        "name": "store_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "The new values of the store",
+                        "name": "store",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Store"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Store"
+                        }
+                    },
+                    "400": {
+                        "description": "The body is not a JSON object"
+                    },
+                    "404": {
+                        "description": "There is no store with this id"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "stores"
+                ],
+                "summary": "Delete a store",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "The id of the store",
+                        "name": "store_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The store is removed"
+                    },
+                    "304": {
+                        "description": "There was no store with this id"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Store": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "store-1"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Athens"
+                }
+            }
+        },
+        "main.StoreCount": {
+            "type": "object",
+            "properties": {
+                "total": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        },
+        "main.StoreFilter": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Name keeps the stores that have it in their name.",
+                    "type": "string",
+                    "example": "Ath"
+                }
+            }
+        },
+        "main.StorePage": {
+            "type": "object",
+            "properties": {
+                "current_page": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "filter": {
+                    "$ref": "#/definitions/main.StoreFilter"
+                },
+                "has_next_page": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Store"
+                    }
+                },
+                "page_size": {
+                    "type": "integer",
+                    "example": 10
+                },
+                "total_items": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "total_pages": {
+                    "type": "integer",
+                    "example": 1
+                }
+            }
+        }
+    }
+}

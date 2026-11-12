@@ -1,0 +1,187 @@
+basePath: /
+definitions:
+  main.Store:
+    properties:
+      id:
+        example: store-1
+        type: string
+      name:
+        example: Athens
+        type: string
+    type: object
+  main.StoreCount:
+    properties:
+      total:
+        example: 1
+        type: integer
+    type: object
+  main.StoreFilter:
+    properties:
+      name:
+        description: Name keeps the stores that have it in their name.
+        example: Ath
+        type: string
+    type: object
+  main.StorePage:
+    properties:
+      current_page:
+        example: 1
+        type: integer
+      filter:
+        $ref: '#/definitions/main.StoreFilter'
+      has_next_page:
+        example: false
+        type: boolean
+      items:
+        items:
+          $ref: '#/definitions/main.Store'
+        type: array
+      page_size:
+        example: 10
+        type: integer
+      total_items:
+        example: 1
+        type: integer
+      total_pages:
+        example: 1
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: A controller of the Iris controller/mvc package, documented with swag
+    comments.
+  license:
+    name: MIT
+    url: https://github.com/iris-contrib/swagger/blob/master/LICENSE
+  title: Stores API
+  version: "1.0"
+paths:
+  /stores:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: The new store. The server sets its id.
+        in: body
+        name: store
+        required: true
+        schema:
+          $ref: '#/definitions/main.Store'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/main.Store'
+        "400":
+          description: The body is not a JSON object
+      summary: Create a store
+      tags:
+      - stores
+  /stores/{store_id}:
+    delete:
+      parameters:
+      - description: The id of the store
+        in: path
+        name: store_id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: The store is removed
+        "304":
+          description: There was no store with this id
+      summary: Delete a store
+      tags:
+      - stores
+    get:
+      parameters:
+      - description: The id of the store
+        in: path
+        name: store_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Store'
+        "404":
+          description: There is no store with this id
+      summary: Get a store
+      tags:
+      - stores
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: The id of the store
+        in: path
+        name: store_id
+        required: true
+        type: string
+      - description: The new values of the store
+        in: body
+        name: store
+        required: true
+        schema:
+          $ref: '#/definitions/main.Store'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Store'
+        "400":
+          description: The body is not a JSON object
+        "404":
+          description: There is no store with this id
+      summary: Update a store
+      tags:
+      - stores
+  /stores/count:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.StoreCount'
+      summary: Count the stores
+      tags:
+      - stores
+  /stores/list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - default: 1
+        description: The number of the page, the first one is 1
+        in: query
+        name: page
+        type: integer
+      - description: The number of stores in a page
+        in: query
+        name: size
+        type: integer
+      - description: Which stores to list
+        in: body
+        name: filter
+        schema:
+          $ref: '#/definitions/main.StoreFilter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.StorePage'
+      summary: List the stores
+      tags:
+      - stores
+swagger: "2.0"

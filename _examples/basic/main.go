@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/iris-contrib/swagger/v12"
-	"github.com/kataras/iris/v12"
+	"github.com/iris-contrib/swagger/v14"
+	"github.com/kataras/iris/v14"
 
-	"github.com/iris-contrib/swagger/v12/_examples/basic/api"
-	"github.com/iris-contrib/swagger/v12/swaggerFiles"
+	"github.com/iris-contrib/swagger/v14/_examples/basic/api"
+	"github.com/iris-contrib/swagger/v14/swaggerFiles"
 
-	_ "github.com/iris-contrib/swagger/v12/_examples/basic/docs"
+	_ "github.com/iris-contrib/swagger/v14/_examples/basic/docs"
 )
 
 // @title Swagger Example API
@@ -27,8 +27,8 @@ import (
 func main() {
 	app := iris.New()
 
-	// To enable compression:
-	// app.Use(iris.Compression)
+	// To enable compression, import "github.com/kataras/iris/v14/middleware/compress" and:
+	// app.Use(compress.Handler)
 
 	app.Get("/v2/testapi/get-string-by-int/{some_id:int}", api.GetStringByInt)
 	app.Get("/v2/testapi/get-struct-array-by-string/{some_id:int}", api.GetStructArrayByString)

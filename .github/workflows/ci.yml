@@ -24,5 +24,19 @@ jobs:
         check-latest: true
     - run: go version
 
+    - name: Vet
+      run: go vet ./...
+
     - name: Test
-      run: go test -v ./...
+      run: go test -v -race ./...
+
+    # A directory that starts with an underscore is not part of "./...",
+    # so each example is vetted, built and tested from its own directory.
+    - name: Examples
+      run: |
+        out="$(mktemp -d)"
+        for dir in _examples/*/; do
+          echo "::group::${dir}"
+          (cd "${dir}" && go vet ./... && go build -o "${out}/" ./... && go test -race ./...)
+          echo "::endgroup::"
+        done

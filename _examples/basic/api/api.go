@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/kataras/iris/v12"
+	"github.com/kataras/iris/v14"
 )
 
 // @Summary Add a new pet to the store
@@ -17,7 +17,7 @@ func GetStringByInt(ctx iris.Context) {
 	// err := web.APIError{}
 	// fmt.Println(err)
 
-	id := ctx.Params().GetIntDefault("some_id", 0)
+	id := ctx.Params().GetInt("some_id")
 	ctx.JSON(Pet3{
 		ID: id,
 	})
@@ -34,7 +34,7 @@ func GetStringByInt(ctx iris.Context) {
 // @Failure 404 {object} web.APIError "Can not find ID"
 // @Router /testapi/get-struct-array-by-string/{some_id} [get]
 func GetStructArrayByString(ctx iris.Context) {
-	id := ctx.Params().GetIntDefault("some_id", 0)
+	id := ctx.Params().GetInt("some_id")
 	ctx.Writef("OK: GetStructArrayByString:  %d", id)
 }
 
