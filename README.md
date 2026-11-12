@@ -3,7 +3,6 @@
 [Iris](https://github.com/kataras/iris) middleware to automatically generate RESTful API documentation with Swagger 2.0 as requested at [#1231](https://github.com/kataras/iris/issues/1231).
 
 [![build status](https://img.shields.io/github/actions/workflow/status/iris-contrib/swagger/ci.yml?branch=master&style=for-the-badge)](https://github.com/iris-contrib/swagger/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/iris-contrib/swagger?style=for-the-badge)](https://goreportcard.com/report/github.com/iris-contrib/swagger)
 
 It serves the [Swagger UI](https://github.com/swagger-api/swagger-ui) page and the API definition that [Swag](https://github.com/swaggo/swag) generates from the comments of your Go code. Handler functions and the methods of a [controller](#controllers) are documented the same way.
 
@@ -11,11 +10,11 @@ It serves the [Swagger UI](https://github.com/swagger-api/swagger-ui) page and t
 
 The `master` branch is for **Iris v14** (`github.com/kataras/iris/v14`) and its module path ends in `/v14`. It needs Go 1.27 or newer, as Iris v14 does. The framework's [migration guide](https://github.com/kataras/iris/blob/main/MIGRATION.md) covers the upgrade from v12, and [Upgrading from v12](#upgrading-from-v12) lists what is different in this module.
 
-The code for Iris v12 is on the [`v12` branch](https://github.com/iris-contrib/swagger/tree/v12) and has a module path of its own. Its last release is v12.2.11:
-
 ```sh
-$ go get github.com/iris-contrib/swagger/v12@latest
+$ go get github.com/iris-contrib/swagger/v14@latest
 ```
+
+For Iris v12, see the [`v12` branch](https://github.com/iris-contrib/swagger/tree/v12). Its README has the install command for that version.
 
 ## Usage
 
