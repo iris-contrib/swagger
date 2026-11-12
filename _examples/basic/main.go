@@ -35,7 +35,7 @@ func main() {
 
 	// Configure the swagger UI page.
 	swaggerUI := swagger.Handler(swaggerFiles.Handler,
-		swagger.URL("http://localhost:8080/swagger/doc.json"), // The url pointing to API definition.
+		swagger.URL("http://localhost:8080/swagger/swagger.json"), // The url pointing to API definition.
 		swagger.DeepLinking(true),
 		swagger.Prefix("/swagger"),
 	)

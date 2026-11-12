@@ -78,7 +78,7 @@ func main() {
     app := iris.New()
 
     swaggerUI := swagger.Handler(swaggerFiles.Handler,
-		swagger.URL("/swagger/doc.json"),
+		swagger.URL("/swagger/swagger.json"),
 		swagger.DeepLinking(true),
 		swagger.Prefix("/swagger"),
 	)
@@ -103,7 +103,7 @@ swagger.DisablingHandler(swaggerFiles.Handler, "THE_OS_VARIABLE_NAME_HERE", conf
 7. If you want to change swagger-ui theme, you can add `swagger.SetTheme(swagger.Monokai)` when init `swaggerUI`
 ```go
 swaggerUI := swagger.Handler(swaggerFiles.Handler,
-    swagger.URL("/swagger/doc.json"),
+    swagger.URL("/swagger/swagger.json"),
     swagger.DeepLinking(true),
     swagger.Prefix("/swagger"),
     // ref: https://github.com/ostranme/swagger-ui-themes
